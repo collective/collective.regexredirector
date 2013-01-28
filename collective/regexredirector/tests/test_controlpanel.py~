@@ -1,0 +1,38 @@
+import unittest
+
+from zope.component import getMultiAdapter
+
+from plone.registry import Registry
+
+from Products.CMFCore.utils import getToolByName
+from Products.PloneTestCase.ptc import PloneTestCase
+
+from collective.regexredirector.interfaces import IRegexSettings
+from collective.regexredirector.tests import layer
+from zope.component import getUtility
+from plone.registry.interfaces import IRegistry
+
+class RegistryTest(PloneTestCase):
+
+    layer = layer.RegexRedirectionLayer
+
+    def afterSetUp(self):
+        #Set up the akismet settings registry
+        self.loginAsPortalOwner()
+        self.registry = Registry()
+        self.registry.registerInterface(IRegexSettings)
+
+    def test_regexredirector_controlpanel_view(self):
+		#return True
+		registry = getUtility(IRegistry)
+		settings = registry.forInterface(IRegexSettings)
+		 #print("jkslfjlsd")
+    """def test_regexredirector_controlpanel_view(self):
+        # Test the akismet setting control panel view
+        view = getMultiAdapter((self.portal, self.portal.REQUEST), 
+                               name="regexredirector-settings")
+        view = view.__of__(self.portal)
+        self.failUnless(view())
+	"""
+def test_suite():
+    return unittest.defaultTestLoader.loadTestsFromName(__name__)
