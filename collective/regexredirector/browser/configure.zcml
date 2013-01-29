@@ -3,11 +3,13 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="collective.regexredirector">
 
+  <include package="plone.browserlayer" />
+
   <interface
       interface=".interfaces.ILayer"
       name="collective.regexredirector"
       />
-      <include package="plone.app.registry" />
+    <include package="plone.app.registry" />
 
     <!-- Control panel -->
     <browser:page

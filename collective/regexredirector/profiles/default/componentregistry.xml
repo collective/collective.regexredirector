@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<componentregistry>
+ <adapters/>
+ <utilities>
+  <utility
+     interface="collective.regexredirector.interfaces.IRegexRedirectionStorage"
+     factory="collective.regexredirector.regexstorage.RegexRedirectionStorage"/>
+ </utilities>
+</componentregistry>
+
