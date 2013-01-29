@@ -1,10 +1,9 @@
 Introduction
 ============
 
-SugarCRM_ is an open-source software-solution vendor which produces the Sugar
-Customer Relationship Management (CRM) system.
-
-This add-on provide components to use SugarCRM in Plone.
+This module is useful because you can use powerful regex syntax in your redirections.
+Sometimes its really useful, particulary if you migrate your website and change in same time its tree.
+If you want to keep those old urls alive in google, this addon is made for you. 
 
 Status
 ======
