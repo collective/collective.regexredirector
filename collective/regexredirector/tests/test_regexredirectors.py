@@ -8,6 +8,7 @@ import transaction
 from collective.regexredirector.interfaces import IRegexSettings
 from collective.regexredirector.regexstorage import RegexRedirectionStorage
 from plone.app.redirector.interfaces import IRedirectionStorage, IFourOhFourView
+from collective.regexredirector.interfaces import IRegexFourOhFourView, IRegexRedirectionStorage
 from collective.regexredirector.tests import layer
 from collective.regexredirector.tests.base import RedirectorTestCase
 from zope.component import getUtility, queryUtility
@@ -21,28 +22,22 @@ class RegistryTest(RedirectorTestCase):
 
 	def afterSetUp(self):
 		self.loginAsPortalOwner()
-		#self.storage = queryUtility(IRedirectionStorage)
-		self.storage = queryUtility(IFourOhFourView)
+		self.storage = queryUtility(IRegexRedirectionStorage)
 		self.registry= getUtility(IRegistry)
 		self.settings = self.registry.forInterface(IRegexSettings)
-		#self.portal.invokeFactory('Folder', 'testfolder')
-		#print(self.portal)
-        #self.folder = self.portal.testfolder
-	
-	def test(self):
-		print self.storage
-	#def test_regexredirector_addregistry(self):
-	#	stri="'/tags/(?P<category_name>.+)'='/category/\g<category_name>/view'\r\n'/references/(?P<category_name>.+)'='/realisations/\g<category_name>'"
-	#	self.settings.regex_values=unicode(stri)
-	#	transaction.commit()
-	#	print(" setRegistry => "+self.settings.regex_values)
+
+	def test_regexredirector_addregistry(self):
+		stri="'/tags/(?P<category_name>.+)'='/category/\g<category_name>/view'\r\n'/references/(?P<category_name>.+)'='/realisations/\g<category_name>'"
+		self.settings.regex_values=unicode(stri)
+		transaction.commit()
+		print(" setRegistry => "+self.settings.regex_values)
 		
-	#def test_regexredirector_haspath(self):
-	#	print(" /tags/toto => "+self.storage.has_path("/tags/toto").__str__())
-	#	print(" references/toto => "+self.storage.has_path("/references/toto").__str__())
+	def test_regexredirector_storage_haspath(self):
+		print(" /tags/toto => "+self.storage.has_path("/tags/toto").__str__())
+		print(" references/toto => "+self.storage.has_path("/references/toto").__str__())
 		
-	#def test_regexredirector_get(self):
-	#	print(" /tags/toto => "+self.storage.get("/tags/toto").__str__())
+	def test_regexredirector_storage_get(self):
+		print(" /tags/toto => "+self.storage.get("/tags/toto").__str__())
 
 		
 """def test_regexredirector_controlpanel_view(self):
