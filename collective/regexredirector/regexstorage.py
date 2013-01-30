@@ -1,5 +1,4 @@
 from plone.app.redirector.storage import RedirectionStorage
-from plone.app.redirector.interfaces import IRedirectionStorage
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
 from zope.interface import implements

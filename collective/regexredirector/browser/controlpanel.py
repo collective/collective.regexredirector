@@ -1,8 +1,3 @@
-from Products.Five.browser import BrowserView
-
-from zope.component import queryUtility
-from plone.registry.interfaces import IRegistry
-
 from plone.app.registry.browser import controlpanel
 
 from collective.regexredirector.interfaces import IRegexSettings, _
