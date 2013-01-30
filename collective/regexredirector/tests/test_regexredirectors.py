@@ -1,18 +1,13 @@
-import unittest
+import unittest, transaction
 
-from zope.component import getMultiAdapter
+from zope.component import getUtility, queryUtility
 
-from plone.registry import Registry
-import transaction
+from plone.registry.interfaces import IRegistry
 
 from collective.regexredirector.interfaces import IRegexSettings
-from collective.regexredirector.regexstorage import RegexRedirectionStorage
-from plone.app.redirector.interfaces import IRedirectionStorage, IFourOhFourView
-from collective.regexredirector.interfaces import IRegexFourOhFourView, IRegexRedirectionStorage
+from collective.regexredirector.interfaces import IRegexRedirectionStorage
 from collective.regexredirector.tests import layer
 from collective.regexredirector.tests.base import RedirectorTestCase
-from zope.component import getUtility, queryUtility
-from plone.registry.interfaces import IRegistry
 
 class RegistryTest(RedirectorTestCase):
 	"""
@@ -28,23 +23,21 @@ class RegistryTest(RedirectorTestCase):
 
 	def test_regexredirector_addregistry(self):
 		stri="'/tags/(?P<category_name>.+)'='/category/\g<category_name>/view'\r\n'/references/(?P<category_name>.+)'='/realisations/\g<category_name>'"
+		self.assertNotEquals(self.settings,None)
+		self.assertEquals(self.settings.regex_values,"")
 		self.settings.regex_values=unicode(stri)
 		transaction.commit()
-		print(" setRegistry => "+self.settings.regex_values)
-		
-	def test_regexredirector_storage_haspath(self):
-		print(" /tags/toto => "+self.storage.has_path("/tags/toto").__str__())
-		print(" references/toto => "+self.storage.has_path("/references/toto").__str__())
-		
-	def test_regexredirector_storage_get(self):
-		print(" /tags/toto => "+self.storage.get("/tags/toto").__str__())
 
 		
-"""def test_regexredirector_controlpanel_view(self):
-	view = getMultiAdapter((self.portal, self.portal.REQUEST), 
-						   name="regexredirector-settings")
-	view = view.__of__(self.portal)
-	self.failUnless(view())
-"""
+	def test_regexredirector_storage_haspath(self):
+		has_path1=self.storage.has_path("/tags/toto")
+		self.assertEquals(has_path1, True)
+		has_path2=self.storage.has_path("/references/toto")
+		self.assertEquals(has_path2, True)
+		
+	def test_regexredirector_storage_get(self):
+		get_path=self.storage.get("/tags/toto")
+		self.assertEquals(get_path,"/category/toto/view")
+
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)
