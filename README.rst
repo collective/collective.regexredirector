@@ -1,48 +1,43 @@
 Introduction
 ============
 
-This module is useful because you can use powerful regex syntax in your redirections.
-Sometimes its really useful, particulary if you migrate your website and change in same time its tree.
-If you want to keep those old urls alive in google, this addon is made for you. 
+collective.regexredirector extends the plone.app.redirector behavior to allow to define redirections
+using regular expressions.
 
-Status
-======
-
-Useable in production
-Tests in developpement
-
-Components
-==========
-
-Regex registry
---------------
-
-A registry is used in order to save regex redirections.
-One redirection by line.
-
-'old_url'='new_url'
-'old_url2'='new_url2'
+It might be particulary useful if you migrate an old website and you want to map old urls to the new
+site structure.
 
 
-Control panel
----------------
+Note: when a 404 occurs, collective.regexredirector first calls plone.app.redirector, and if it does not
+redirect, then collective.regexredirector tries to match one of its registered regular expressions.
 
-To use the registry, you can use the registry configuration or you can use the 
-control panel "RegexRedirector".
+Usage
+=====
+
+In the Plone control panel, go to the "RegexRedirector" control panel and enter your redirection rules.
+
+One redirection by line using the following format ::
+
+    'old_url'='new_url'
+    'old_url2'='new_url2'
 
 
-The redirector
---------------
+Examples
+--------
 
-The utility overiddes plone.app.redirector utility in 404 case.
-So first we check by the original utility in RedirectionStorage then we check the 
-regex redirector pattern.
+Redirecting all urls like /news/something to /archives/index ::
+
+    '/news/.*'='/archives/index'
+
+Redirecting all urls like /tags/something to /category/something ::
+
+    '/tags/(?P<category_name>.+)'='/category/\g<category_name>/view'
 
 
 INSTALL
 =======
 
-Simple installation, you need juste plone.app.redirector ( which is already in the core of Plone )
+Add collective.regexredirector to your buildout eggs.
 
 Credits
 =======
