@@ -6,9 +6,9 @@ from interfaces import IRegexSettings,IRegexRedirectionStorage
 import re
 
 class RegexRedirectionStorage(RedirectionStorage):
-    implements(IRegexRedirectionStorage)
+	implements(IRegexRedirectionStorage)
 
-    def has_path(self, old_path,settings=None):
+	def has_path(self, old_path,settings=None):
 		"""
 		After watching on superclass, look on regex registry if the oldpath is redirected
 		"""
@@ -24,7 +24,7 @@ class RegexRedirectionStorage(RedirectionStorage):
 						break
 		return found 
 		
-    def get(self,old_path,default=None):
+	def get(self,old_path,default=None):
 		"""
 		After watching on superclass, look on regex registry if the oldpath is redirected and 
 		return the new url in paying attention on the regex pattern
@@ -39,16 +39,16 @@ class RegexRedirectionStorage(RedirectionStorage):
 					return re.sub(regex,regex_array[regex],old_path)
 		return result
 
-    def get_regex_registry(self):
+	def get_regex_registry(self):
 		registry = getUtility(IRegistry)
 		settings = registry.forInterface(IRegexSettings)
 		return settings
 
-    def parse_to_array(self,regex_string):
-        result={}
-        retur=regex_string.split("\r\n")
-        for element in retur:
-            element2=element.split("=")
-            if len(element2)>1:
-                result[element2[0].replace("'","")]=element2[1].replace("'","")
-        return result
+	def parse_to_array(self,regex_string):
+		result={}
+		retur=regex_string.split("\r\n")
+		for element in retur:
+			element2=element.split("=")
+			if len(element2)>1:
+				result[element2[0].replace("'","")]=element2[1].replace("'","")
+		return result
