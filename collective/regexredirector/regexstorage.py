@@ -46,7 +46,7 @@ class RegexRedirectionStorage(RedirectionStorage):
 
 	def parse_to_array(self,regex_string):
 		result={}
-		retur=regex_string.split("\r\n")
+		retur=regex_string.replace("\r","").split("\n")
 		for element in retur:
 			element2=element.split("=")
 			if len(element2)>1:
