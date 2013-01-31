@@ -35,6 +35,7 @@ setup(name='collective.regexredirector',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'plone.testing'
           # -*- Extra requirements: -*-
       ],
       extras_require = dict(
