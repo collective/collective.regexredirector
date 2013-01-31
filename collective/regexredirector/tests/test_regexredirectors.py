@@ -40,4 +40,4 @@ class RegistryTest(RedirectorTestCase):
 		self.assertEquals(get_path,"/category/toto/view")
 
 def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)
+	return unittest.defaultTestLoader.loadTestsFromName(__name__)

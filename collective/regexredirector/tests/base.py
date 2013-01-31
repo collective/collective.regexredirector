@@ -7,9 +7,8 @@ from Products.PloneTestCase import PloneTestCase
 
 class UnitTestCase(unittest.TestCase):
 
-    def setUp(self):
-        pass
+	def setUp(self):
+		pass
 
 class RedirectorTestCase(PloneTestCase.PloneTestCase):
-    pass
-
+	pass
