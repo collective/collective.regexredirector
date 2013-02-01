@@ -64,3 +64,11 @@ We check that the differents patterns work:
   >>> browser.open('http://nohost/plone/tata/test')
   >>> browser.url
   'http://nohost/plone/foo/test'
+  
+  >>> browser.open('http://nohost/plone/tata/createObject?type_name=Document')
+  >>> browser.getControl('Title').value = 'BaBa'
+  >>> browser.getControl('Save').click()
+  
+  >>> browser.open('http://nohost/plone/tata/baba')
+  >>> browser.url
+  'http://nohost/plone/foo/baba'
