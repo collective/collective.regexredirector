@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.2.2 (2015-05-12)
+------------------
+
+- Supports redirection to url containing a querystring
+- Fix bug if rules contain '='
+
 0.2.1 (2013-03-28)
 -------------------
 
