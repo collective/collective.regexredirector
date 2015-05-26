@@ -38,7 +38,7 @@ class RegexFourOhFourView(FourOhFourView):
 
             if storage:
                 new_path = storage.get(old_path.replace(site_path, "", 1))
-                if '?' in new_path:
+                if new_path and '?' in new_path:
                     (new_path, useless, qs) = new_path.partition('?')
                     if query_string:
                         query_string = '%s&%s' % (qs, query_string)
